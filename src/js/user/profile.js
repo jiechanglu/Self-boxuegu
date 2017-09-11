@@ -8,7 +8,7 @@ $.ajax({
     type: 'post',
     success: function(data) {
         if (data.code == 200) {
-            $('.teacher-profile').html(template('tex-tel', data.result));
+            $('.teacher-profile').html(template('teacher-profile-tpl', data.result));
         }
     }
 });
@@ -22,6 +22,7 @@ $.ajax({
 $('#teacher-profile-form').ajaxForm({
     delegation: true,
     success: function(data) {
+        console.log(data)
         if (data.code == 200) {
             alert('修改成功');
         }
