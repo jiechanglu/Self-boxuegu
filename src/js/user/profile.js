@@ -5,7 +5,7 @@ require('../common/aside.js');
 //个人中心页面
 $.ajax({
     url: '/v6/teacher/profile',
-    type: 'get',
+    type: 'post',
     success: function(data) {
         if (data.code == 200) {
             $('.teacher-profile').html(template('tex-tel', data.result));
