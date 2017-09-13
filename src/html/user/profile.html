@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <script id="teacher-profile-tpl" type="text/tpl">
+    <script id="teacher-profile-tpl" type="text/template">
         <div class="settings">
             <form id="teacher-profile-form" method="post" action="/v6/teacher/modify" class="form-horizontal">
                 <input type="hidden" name="tc_id" value="{{ tc_id }}" />
@@ -70,20 +70,14 @@
                 <div class="form-group">
                     <label for="" class="col-xs-3 control-label">籍贯</label>
                     <div class="col-xs-5">
-                        <select name="" class="form-control input-sm">
+                        <select name="" class="form-control input-sm" data-id="{{ tc_province }}">
                                     <option value="">河北省</option>
-                                    <option value="">山东省</option>
-                                    <option value="">北京市</option>
                                 </select>
-                        <select name="" class="form-control input-sm">
+                        <select name="" class="form-control input-sm" data-id="{{ tc_city }}">
                                     <option value="">河北省</option>
-                                    <option value="">山东省</option>
-                                    <option value="">北京市</option>
                                 </select>
-                        <select name="" class="form-control input-sm">
+                        <select name="" class="form-control input-sm" data-id="{{ tc_district }}">
                                     <option value="">河北省</option>
-                                    <option value="">山东省</option>
-                                    <option value="">北京市</option>
                                 </select>
                     </div>
                 </div>
