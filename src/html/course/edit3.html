@@ -18,7 +18,7 @@
             <!-- 头部 -->
             <!-- build:header -->
             <!-- endbuild -->
-            <div class="body course-add">
+            <div id="course_edit3" class="body course-add">
                 <!-- 面包屑 -->
                 <ol class="breadcrumb">
                     <li><a href="javascript:;">课程管理</a></li>
@@ -34,7 +34,7 @@
     </div>
 
     <script id="course_edit3_tpl" type="text/template">
-        <input type="hidden" name="cs_id" value="{{ cs_id }}">
+        <!-- <input type="hidden" name="cs_id" value="{{ cs_id }}"> -->
         <div class="steps">
             <!-- 摘要 -->
             <!-- 摘要 -->
@@ -71,7 +71,7 @@
                 <!-- 标题 -->
                 <div class="title">
                     <h5>课时管理 <small>LESSON MANAGE</small></h5>
-                    <a src="javascript:;" data-toggle="modal" data-target="#chapterModal" class="btn btn-success btn-sm pull-right">
+                    <a src="javascript:;" id="btn-lesson-add" data-toggle="modal" data-target="#chapterModal" class="btn btn-success btn-sm pull-right">
                         <i class="fa fa-plus"></i>课时
                     </a>
                 </div>
@@ -81,12 +81,12 @@
                         <li>
                             <i class="fa fa-file-video-o"></i>
                             <span class="order">课时：{{ i+1 }}</span>
-                            <span class="name">{{ lesson.cs_name }}</span>
+                            <span class="name">{{ lesson.ct_name }}</span>
                             <span class="duration">{{ lesson.ct_video_duration }}</span>
                             <!-- 操作 -->
                             <div class="action pull-right">
-                                <a href="#chapterModal" class="btn btn-lesson-edit btn-info btn-xs" data-toggle="modal" data-target="#chapterModal">编辑</a>
-                                <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+                                <a href="#chapterModal" data-id="{{ lesson.ct_id }}" class="btn btn-lesson-edit btn-info btn-xs" data-toggle="modal">编辑</a>
+                                <a href="javascript:;" data-id="{{ lesson.ct_id }}" class="btn btn-danger btn-xs">删除</a>
                             </div>
                         </li>
                         {{ /each }}
@@ -97,23 +97,27 @@
     </script>
 
     <script id="course_info_tpl" type="text/template">
-        <div id="lesson-tpl" class="modal-dialog" style="width: 800px;">
+        <div class="modal-dialog" style="width: 800px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">添加课时</h4>
+                    <h4 class="modal-title">{{ ct_id?'编辑章节':'添加章节' }}</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="/v6/course/lesson" method="get" class="form-horizontal">
+                    <form id="lesson-form" action="{{ ct_id? '/v6/course/chapter/modify':'/v6/course/chapter/add' }}" method="post" class="form-horizontal">
+                        <!-- ct_cs_id是后端为了确定你编辑添加的章节属于哪个课程，这个值可以从location.search中提取 -->
+                        <input type="hidden" name="ct_cs_id" value="{{ cs_id }}">
+                        <!-- ct_id是编辑章节时后端为了区分你编辑的是谁 -->
+                        <input type="hidden" name="ct_id" value="{{ ct_id }}">
                         <div class="form-group">
                             <label for="" class="col-xs-2 control-label">标题</label>
                             <div class="col-xs-6">
-                                <input type="text" name="cs_name" value="{{ cs_name }}" class="form-control input-sm">
+                                <input type="text" name="ct_name" value="{{ ct_name }}" class="form-control input-sm">
                             </div>
                             <div class="col-xs-2">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> 免费课时
+                                        <input name="ct_is_free" {{ ct_is_free==1? 'checked':'' }} type="checkbox"> 免费课时
                                     </label>
                                 </div>
                             </div>
@@ -121,14 +125,14 @@
                         <div class="form-group">
                             <label for="" class="col-xs-2 control-label">简介</label>
                             <div class="col-xs-8">
-                                <textarea name="ct_name" rows="5" class="form-control input-sm"></textarea>
+                                <textarea name="ct_brief" rows="5" class="form-control input-sm">{{ ct_brief }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-2 control-label">视频</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-sm" placeholder="支持优酷、土豆、腾讯、网易公开课的视频页面地址导入">
+                                    <input type="text" name="ct_video" value="{{ ct_video }}" class="form-control input-sm" placeholder="支持优酷、土豆、腾讯、网易公开课的视频页面地址导入">
                                     <span class="input-group-btn">
                                         <button class="btn btn-success btn-sm">获取</button>
                                     </span>
@@ -138,23 +142,23 @@
                         <div class="form-group form-inline">
                             <label for="" class="col-xs-2 control-label">时长</label>
                             <div class="col-xs-8">
-                                <input type="text" class="form-control input-sm small"> 分
-                                <input type="text" class="form-control input-sm small"> 秒
+                                <input type="text" name="ct_minutes" value="{{ ct_minutes }}" class="form-control input-sm small"> 分
+                                <input type="text" name="ct_seconds" value="{{ ct_seconds }}" class="form-control input-sm small"> 秒
                                 <p class="help-block">时长必须为整数。</p>
                             </div>
                         </div>
                         <div class="form-group form-inline">
                             <label for="" class="col-xs-2 control-label">建议学习时长</label>
                             <div class="col-xs-8">
-                                <input type="text" class="form-control input-sm small"> 小时
+                                <input type="text" name="ct_recommend_duration" value="{{ ct_recommend_duration }}" class="form-control input-sm small"> 小时
                                 <p class="help-block">（如未设置，则默认学习时长为视频时长3倍取整。）</p>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link btn-sm" data-dismiss="modal">取消</button>
+                            <button type="sumbit" class="btn btn-success btn-sm"> {{ ct_id? '保存':'添加' }}</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link btn-sm" data-dismiss="modal">取消</button>
-                    <button type="button" id="btn-lesson-add" class="btn btn-success btn-sm"> 添 加 </button>
                 </div>
             </div>
         </div>

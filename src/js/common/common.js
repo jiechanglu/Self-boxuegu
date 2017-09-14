@@ -8,8 +8,8 @@ window.onload = function() {
 
 var isLogin = !!$.cookie('PHPSESSID');
 var isLoginPage = (location.pathname == '/dist/html/user/login.html');
-console.log(isLogin);
-console.log(isLoginPage);
+// console.log(isLogin);
+// console.log(isLoginPage);
 
 if (isLogin && isLoginPage) {
     location.href = '/dist'

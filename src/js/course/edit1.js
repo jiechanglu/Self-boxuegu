@@ -5,6 +5,7 @@ var util = require('../common/util.js');
 
 var cs_id = util.getSearch("cs_id");
 $.get('/v6/course/basic', { cs_id: cs_id }, function(data) {
+    data.result.editIndex = 1;
     $('.course-add').append(template('course_edit1_tpl', data.result))
 });
 
