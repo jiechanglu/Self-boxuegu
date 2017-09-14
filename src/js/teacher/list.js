@@ -1,6 +1,6 @@
 require('../common/header.js');
 require('../common/aside.js');
-
+require('../common/common.js');
 /**
  * 功能点：
  * 1、列表数据展示

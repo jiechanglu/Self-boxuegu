@@ -1,5 +1,7 @@
 // 首页需要头部功能，所以这里导入一下
 require('../common/header.js');
+require('../common/common.js');
+
 // console.log($('input[cs_id]').val());
 // $.post('/v6/course/create', { cs_name: $('input[cs_name]').val() }, function(data) {
 //     if (data.code == 200) {
