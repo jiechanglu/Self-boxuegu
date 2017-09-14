@@ -1,5 +1,7 @@
 // 当用户点击登陆按钮的时候，这个插件ajaxForm方法会自动监听submit事件
 // 然后阻止浏览器默认的刷新提交，然后自动变成ajax的方式发送请求。
+NProgress.start();
+
 require('../common/common.js');
 
 require('../common/header.js');
@@ -20,7 +22,7 @@ $('#login-form').ajaxForm({
     }
 });
 
-
+NProgress.done();
 
 
 // $('#login-form').on('submit', function(e) {
