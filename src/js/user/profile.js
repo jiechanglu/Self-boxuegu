@@ -10,6 +10,7 @@ $.ajax({
     success: function(data) {
         if (data.code == 200) {
             $('.teacher-profile').html(template('teacher-profile-tpl', data.result));
+            initDate();
         }
     }
 });
@@ -29,3 +30,30 @@ $('#teacher-profile-form').ajaxForm({
         }
     }
 });
+
+function initDate() {
+    $('#birthday').datepicker({
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd',
+        // onSelect: gotoDate
+        // startDate: new Date('2000 - 09 - 15'),
+        // endDate: new Date('2030 - 09 - 15')
+    }).on('changeDate', function() {
+        show = false;
+    });
+    // .on('changeDate', gotoDate);;
+    $('#join_date').datepicker({
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd',
+        // startDate: new Date('2000 - 09 - 15'),
+        // endDate: new Date('2030 - 09 - 15')
+    });
+    // $('#birthday').on('changeDate', function($e) {
+    //     show = false;
+    // });
+}
+
+// function gotoDate(ev) {
+//     // $(this).html(ev.date.getFullYear().toString() + " - " + (ev.date.getMonth() + 1).toString() + " - " + ev.date.getDate().toString());
+//     datepicker.hide;
+// }

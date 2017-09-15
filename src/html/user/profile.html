@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
+
     <!-- build:style -->
     <!-- endbuild -->
 </head>
@@ -64,7 +65,8 @@
                 <div class="form-group">
                     <label for="" class="col-xs-3 control-label">出生日期</label>
                     <div class="col-xs-5">
-                        <input name="tc_birthday" type="text" value='{{ tc_birthday }}' class="form-control input-sm">
+                        <!-- <input data-date-language='zh-CN' data-date-format='yyyy-mm-dd' data-provide="datepicker" id="birthday" name="tc_birthday" type="text" value='{{ tc_birthday }}' class="form-control input-sm"> -->
+                        <input [ngModel]="dt.toLocaleDateString()" (focus)="showDatePicker = true;showDatePicker1 = false;" id="birthday" name="tc_birthday" type="text" value='{{ tc_birthday }}' class="form-control input-sm">
                     </div>
                 </div>
                 <div class="form-group">
@@ -96,7 +98,7 @@
                 <div class="form-group">
                     <label for="" class="col-xs-3 control-label">入职日期</label>
                     <div class="col-xs-5">
-                        <input name="tc_join_date" value="{{ tc_join_date }}" type="text" class="form-control input-sm">
+                        <input id="join_date" name="tc_join_date" value="{{ tc_join_date }}" type="text" class="form-control input-sm">
                     </div>
                 </div>
                 <div class="form-group">
@@ -115,6 +117,7 @@
         </div>
     </script>
     <script src="/dist/js/lib.js"></script>
+    <script src="/node_modules/ckeditor/ckeditor.js"></script>
     <script src="/dist/js/user/profile.js"></script>
 </body>
 
