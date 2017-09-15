@@ -76,18 +76,21 @@
                         可上传jpg, gif, png格式文件, 图片建议尺寸大于300x150，文件大小不能超过2M。
                     </p>
                     <div class="col-xs-2">
-                        <a href="/dist/html/course/edit3.html" class="btn btn-success btn-sm">选择图片</a>
-                        <!-- <input type="file" value="选择图片" class="btn btn-success btn-sm"> -->
+                        <input id="uploadify" value="选择图片" class="btn btn-success btn-sm" type="file">
+                        <!-- <a id="btn-uploadify" href="javascript:;" class="btn btn-success btn-sm">选择图片</a> -->
                     </div>
                     <div class="col-xs-2">
-                        <a href="javascript:;" class="btn btn-warning btn-sm" disabled>裁切图片</a>
+                        <a id="btn-clip" href="javascript:;" class="btn btn-warning btn-sm">裁切图片</a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a id="btn-slip-save" href="javascript:;" class="btn btn-success btn-sm">保存</a>
                     </div>
                 </div>
             </div>
         </div>
     </script>
     <script src="/dist/js/lib.js"></script>
-    <script src="/dist/js/index.js"></script>
+    <!-- <script src="/dist/js/index.js"></script> -->
     <script src="/dist/js/course/edit2.js"></script>
 </body>
 

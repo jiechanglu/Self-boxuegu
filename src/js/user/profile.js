@@ -35,22 +35,29 @@ function initDate() {
     $('#birthday').datepicker({
         language: 'zh-CN',
         format: 'yyyy-mm-dd',
-        // onSelect: gotoDate
         // startDate: new Date('2000 - 09 - 15'),
         // endDate: new Date('2030 - 09 - 15')
-    }).on('changeDate', function() {
-        show = false;
     });
-    // .on('changeDate', gotoDate);;
+    // .on('changeDate', function() {
+    //     show = false;
+    // });
+
+    //加入日期
     $('#join_date').datepicker({
         language: 'zh-CN',
         format: 'yyyy-mm-dd',
-        // startDate: new Date('2000 - 09 - 15'),
-        // endDate: new Date('2030 - 09 - 15')
     });
-    // $('#birthday').on('changeDate', function($e) {
-    //     show = false;
-    // });
+
+    //三级联动插件
+    $('#region_container').region({
+        url: '/lib/jquery-region/region.json'
+    });
+
+    //副文本编辑器,下面传一个文本框的id值就完整了
+    CKEDITOR.replace('introduce', {
+        //这里可以设置一些文本框属性值，如：width:600宽度
+        // width: 600
+    });
 }
 
 // function gotoDate(ev) {
